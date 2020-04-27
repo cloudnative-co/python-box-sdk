@@ -170,10 +170,10 @@ class File(Client):
             )
         except boxsdk.exception.BoxAPIException as e:
             if e.code == "item_name_in_use":
-                exists = True
-                if not overwrite and exists:
+                if not overwrite:
                     raise e
-                file_id = e.info["conflicts"]["id"]
+                exists = True
+                file_id = e.context_info['conflicts']['id']
             else:
                 raise e
         try:

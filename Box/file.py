@@ -169,7 +169,7 @@ class File(Client):
                  name=name, parent_id=folder_id, size=length
             )
         except boxsdk.exception.BoxAPIException as e:
-            if e.state == 409:
+            if e.code == "item_name_in_use":
                 exists = True
                 if not overwrite and exists:
                     raise e

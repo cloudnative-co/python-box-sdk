@@ -168,7 +168,7 @@ class File(Client):
             preflight = self.preflight(
                  name=name, parent_id=folder_id, size=length
             )
-        except APIException as e:
+        except boxsdk.exception.BoxAPIException as e:
             if e.state == 409:
                 exists = True
                 if not overwrite and exists:

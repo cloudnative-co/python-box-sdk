@@ -161,17 +161,17 @@ class File(Client):
         except boxsdk.exception.BoxAPIException as e:
             raise e
 
-    def uploader(stream, length, name):
+    def uploader(stream, length, name, folder_id):
         try:
             if length <= 20000000:
                 uploaded_file = self.upload(
-                    folder_id=box_folder_id, stream=io.BytesIO(stream.read()),
+                    folder_id=folder_id, stream=io.BytesIO(stream.read()),
                     name=name, overwrite=True
                 )
                 return uploaded_file.id, uploaded_file.name
             # Chunk upload
             session = self.client.folder(
-                folder_id=box_folder_id
+                folder_id=folder_id
             ).create_upload_session(file_size=length, file_name=name)
             parts = []
             sha1 = hashlib.sha1()

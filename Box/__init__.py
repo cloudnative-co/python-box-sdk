@@ -9,3 +9,4 @@ from .user import User
 from .file import File
 from .folder import Folder
 from .sharedlink import SharedLink
+from .event import Event

@@ -16,12 +16,12 @@ class Event(Client):
         stream_position: str = None,
         stream_type: str = None
     ):
-        args = get_arguments(locals())
-        args["method"] = "GET"
-        args["url"] = self.client.get_url("events")
-
-        return self.client.make_request(**args).json()
-#        return self.client.events().get_events(**args)
+        query = get_arguments(locals())
+        return self.client.make_request(
+            method="GET",
+            url=self.client.get_url("events"),
+            params=query
+        ).json()
 
     def endpoint(self):
         return self.client.events().generate_events_with_long_polling()

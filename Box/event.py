@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+# import module snippets
+import datetime
+from .client import Client
+from .util import get_arguments
+
+
+class Event(Client):
+
+    def items(
+        self,
+        created_after: datetime.datetime = None,
+        created_before: datetime.datetime = None,
+        event_type: list = None,
+        limit: int = None,
+        stream_position: str = None,
+        stream_type: str = None
+    ):
+        args = get_arguments(locals())
+        args["method"] = "GET"
+        args["url"] = self.client.get_url("events")
+
+        return self.client.make_request(**args).json()
+#        return self.client.events().get_events(**args)
+
+    def endpoint(self):
+        return self.client.events().generate_events_with_long_polling()

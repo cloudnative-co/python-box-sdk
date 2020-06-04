@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="BoxSDK-Cn",
-    version="0.0.6a",
+    version="0.0.6a0",
     description="Box-SDK-Cn",
     author="sebastian",
     author_email="seba@cloudnative.co.jp",
